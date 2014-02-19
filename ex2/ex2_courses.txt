@@ -1,0 +1,7 @@
+F13,INLS523,001,Databases I,Capra
+F13,INLS509,001,Information Retrieval,Arguello
+S14,INLS760,001,WebDB,Capra
+S14,INLS509,002,Information Retrieval,Kelly
+S14,INLS509,001,Information Retrieval,Arguello
+F13,INLS523,03W,Databases I,Haas
+S14,INLS512,001,NLP,Haas
