@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<title>home page</title>
+<link rel="stylesheet" type="text/css" href="styles.css">
+<script type="text/javascript">
+function getSuggestion() {
+	var xmlHttp;
+	try {
+		// Firefox, Opera 8.0+, Safari
+		xmlHttp = new XMLHttpRequest();		
+	} catch (e) {
+		// IE
+		try {
+			xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+		} catch (e) {
+			try {
+				xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");				
+			} catch (e) {
+				alert("Your browser does not support AJAX");
+				return false;				
+			}
+		}
+		
+	}
+	xmlHttp.onreadystatechange = function () {
+		if (xmlHttp.readyState == 4) {
+			document.getElementById('suggestion-box').innerHTML = xmlHttp.responseText;
+		}
+	}
+	
+	var pref = document.getElementsByName("keywords")[0].value;
+	console.log("pref: " + pref);
+	var urlquery = "keyword-suggestions.php?prefix=" + pref;
+	xmlHttp.open("GET", urlquery, true);
+	xmlHttp.send(null);
+	
+	
+}
+</script>
+</head>
+<body>
+	<div id="search-area">
+		<h1>Search Tool</h1>
+		<form id="search-form" name="search_form" method="get" action="search.php">
+			Title:&nbsp;<input type="text" name="title">
+			<p>
+			Keywords:&nbsp;<input type="text" name="keywords" onkeyup="getSuggestion()">
+			<p>		
+			Search in title, description, keywords:&nbsp;<input type="text" name="tdk_fulltext">
+			<p>
+			Year:&nbsp;<input type="text" name="start_year">&nbsp;-&nbsp;<input type="text" name="end_year">
+			<p>
+			Duration:&nbsp;<input type="text" name="min_sec">sec&nbsp;-&nbsp;<input type="text" name="max_sec">sec
+			<p>
+			<input type="checkbox" name="sound">&nbsp;Sound
+			<p>
+			<input type="checkbox" name="color">&nbsp;In Color
+			<p>
+			<input type="submit" value="Search">
+			<p>
+		</form>
+	</div>
+	<div id="suggestion-box">
+	</div>
+
+</body>
+</html>
